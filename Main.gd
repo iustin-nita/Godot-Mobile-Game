@@ -29,6 +29,7 @@ func spawn_circle(_position=null):
 
 func _on_Jumper_captured(object):
 	$Camera2D.position = object.position
+	object.capture()
 	# can't call directly spawn_circle() because we are 
 	# changing the physics state during physics processing
 	call_deferred("spawn_circle")

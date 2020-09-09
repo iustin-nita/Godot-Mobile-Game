@@ -22,3 +22,7 @@ func implode():
 	$AnimationPlayer.play("implode")
 	yield($AnimationPlayer, "animation_finished")
 	queue_free()
+
+func capture():
+	$AnimationPlayer.play("capture")
+	
