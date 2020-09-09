@@ -7,14 +7,14 @@ var player
 
 func _ready():
 	randomize()
-	new_game()
-	
+
 func new_game():
 	$Camera2D.position = $StartingPosition.position
 	player = Jumper.instance()
 	player.position = $StartingPosition.position
 	add_child(player)
 	player.connect("captured", self, "_on_Jumper_captured")
+	player.connect("died", self, "_on_Jumper_died")
 	spawn_circle($StartingPosition.position)
 	
 func spawn_circle(_position=null):
@@ -29,7 +29,11 @@ func spawn_circle(_position=null):
 
 func _on_Jumper_captured(object):
 	$Camera2D.position = object.position
-	object.capture()
+	object.capture(player)
 	# can't call directly spawn_circle() because we are 
 	# changing the physics state during physics processing
 	call_deferred("spawn_circle")
+
+func _on_Jumper_died():
+	get_tree().call_group("circles", "implode") # lets us call a function on each member of the group
+	$Screens.game_over()
