@@ -11,11 +11,13 @@ func _unhandled_input(event):
 		jump()
 
 func jump():
+	target.implode()
 	target = null
 	velocity = transform.x * jump_speed
 
 func _on_Jumper_area_entered(area):
 	target = area
+	target.get_node("Pivot").rotation = (position - target.position).angle()
 	velocity = Vector2.ZERO
 	emit_signal("captured", area)
 
