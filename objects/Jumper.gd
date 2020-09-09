@@ -1,5 +1,7 @@
 extends Area2D
 
+signal captured
+
 var velocity = Vector2(100,0) # start value for testing
 var jump_speed = 1000
 var target = null # if we're on a circle
@@ -15,6 +17,7 @@ func jump():
 func _on_Jumper_area_entered(area):
 	target = area
 	velocity = Vector2.ZERO
+	emit_signal("captured", area)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

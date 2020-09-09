@@ -5,10 +5,8 @@ onready var orbit_position = $Pivot/OrbitPosition
 var radius = 100
 var rotation_speef = PI
 
-func _ready():
-	init()
-	
-func init(_radius = radius):
+func init(_position, _radius = radius):
+	position = _position
 	radius = _radius
 	$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate()
 	$CollisionShape2D.shape.radius = radius
