@@ -22,6 +22,8 @@ func new_game():
 	spawn_circle($StartingPosition.position)
 	$HUD.show()
 	$HUD.show_message("Go!")
+	if settings.enable_music:
+		$Music.play()
 	
 func spawn_circle(_position=null):
 	var c = Circle.instance()
@@ -46,3 +48,5 @@ func _on_Jumper_died():
 	get_tree().call_group("circles", "implode") # lets us call a function on each member of the group
 	$Screens.game_over()
 	$HUD.hide()
+	if settings.enable_music:
+		$Music.stop()
