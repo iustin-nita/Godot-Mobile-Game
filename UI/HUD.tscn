@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/fonts/default.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI/HUD.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -63,15 +64,15 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 46, 120 ]
+"update": 0,
+"values": [ 46, 200 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Message:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = false
+tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
@@ -80,11 +81,14 @@ tracks/2/keys = {
 }
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource( 3 )
 
 [node name="ScoreBox" type="MarginContainer" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -98.0977
+margin_bottom = -2.09766
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -101,12 +105,12 @@ margin_bottom = 76.0
 alignment = 2
 
 [node name="Label" type="Label" parent="ScoreBox/HBoxContainer"]
-margin_left = 268.0
+margin_left = 231.0
 margin_right = 337.0
 margin_bottom = 56.0
 size_flags_vertical = 5
 custom_fonts/font = SubResource( 1 )
-text = "100"
+text = "Score:"
 
 [node name="Score" type="Label" parent="ScoreBox/HBoxContainer"]
 margin_left = 341.0
@@ -117,11 +121,13 @@ custom_fonts/font = ExtResource( 2 )
 text = "100"
 
 [node name="Message" type="Label" parent="."]
+visible = false
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_top = -28.0
 margin_bottom = 28.0
+grow_vertical = 2
 custom_fonts/font = SubResource( 2 )
 text = "Message"
 align = 1
