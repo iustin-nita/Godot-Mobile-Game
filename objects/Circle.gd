@@ -1,12 +1,15 @@
 extends Area2D
 
 onready var orbit_position = $Pivot/OrbitPosition
+onready var move_tween = $MoveTween
 
 # LIMITED = limited number of orbits
 enum MODES {STATIC, LIMITED}
 var radius = 100
 var rotation_speed = PI
 var mode = MODES.STATIC
+var move_range = 100
+var move_speed = 1.0
 var num_orbits = 3
 var current_orbits = 0
 var orbit_start = null
@@ -25,6 +28,7 @@ func init(_position, _radius = radius, _mode = MODES.LIMITED):
 	orbit_position.position.x = radius + 25
 	rotation_speed *= pow(-1, randi() % 2)
 	$AnimationPlayer.play("music")
+	set_tween()
 	
 func _process(delta):
 	$Pivot.rotation += rotation_speed * delta
@@ -72,7 +76,7 @@ func capture(target):
 func _draw():
 	if jumper:
 		var r = ((radius - 50) / num_orbits) * (1 + num_orbits - current_orbits)
-		draw_circle_arc(Vector2.ZERO, r + 10, orbit_start + PI/2, $Pivot.rotation + PI/2, Color(77, 25, 77))
+		draw_circle_arc(Vector2.ZERO, r + 10, orbit_start + PI/2, $Pivot.rotation + PI/2, settings.theme["circle_fill"])
 		#$Sprite.get_material().set_shader_param("color", Color(78, 168, 222))
 	
 func draw_circle_arc(center, radius, angle_from, angle_to, color):
@@ -85,3 +89,12 @@ func draw_circle_arc(center, radius, angle_from, angle_to, color):
 
 	for index_point in range(nb_points):
 		draw_line(points_arc[index_point], points_arc[index_point + 1], color)
+
+func set_tween(object = null, key = null):
+	if move_range == 0:
+		return
+	move_range *= -1
+	move_tween.interpolate_property(self, "position:x", 
+				position.x, position.x + move_range, 
+				move_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	move_tween.start()

@@ -32,4 +32,4 @@ var color_schemes = {
 	}
 }
 
-var theme = color_schemes["NEON1"]
+var theme = color_schemes["NEON2"]

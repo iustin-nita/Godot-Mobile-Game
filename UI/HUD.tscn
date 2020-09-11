@@ -9,7 +9,7 @@ size = 32
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 46
+size = 200
 font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=3]
@@ -42,7 +42,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "show_message"
-length = 0.75
 tracks/0/type = "value"
 tracks/0/path = NodePath("Message:visible")
 tracks/0/interp = 1
@@ -62,7 +61,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.7 ),
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 46, 200 ]
@@ -74,7 +73,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.7 ),
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -121,7 +120,7 @@ custom_fonts/font = ExtResource( 2 )
 text = "100"
 
 [node name="Message" type="Label" parent="."]
-visible = false
+modulate = Color( 1, 1, 1, 0 )
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5

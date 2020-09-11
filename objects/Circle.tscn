@@ -79,7 +79,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 resource_name = "music"
 length = 0.4
 loop = true
@@ -88,7 +88,7 @@ tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 0.965936, 1 ),
@@ -96,12 +96,12 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="DynamicFontData" id=5]
+[sub_resource type="DynamicFontData" id=6]
 font_path = "res://assets/fonts/Xolonium-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=7]
 size = 64
-font_data = SubResource( 5 )
+font_data = SubResource( 6 )
 
 [node name="Circle" type="Area2D" groups=[
 "circles",
@@ -110,7 +110,6 @@ script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
-scale = Vector2( 1.09725, 1.09725 )
 z_index = -2
 texture = ExtResource( 1 )
 
@@ -132,7 +131,7 @@ position = Vector2( 170, 0 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/capture = SubResource( 3 )
 anims/implode = SubResource( 4 )
-anims/music = SubResource( 7 )
+anims/music = SubResource( 5 )
 
 [node name="Label" type="Label" parent="."]
 anchor_left = 0.5
@@ -143,7 +142,7 @@ margin_left = -22.5
 margin_top = -39.0
 margin_right = 22.5
 margin_bottom = 39.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "1"
 align = 1
 valign = 1
@@ -154,3 +153,6 @@ __meta__ = {
 [node name="Beep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = 2.019
+
+[node name="MoveTween" type="Tween" parent="."]
+[connection signal="tween_completed" from="MoveTween" to="." method="set_tween"]

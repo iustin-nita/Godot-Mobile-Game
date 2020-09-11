@@ -7,8 +7,9 @@ func animate(start, end):
 	tween.start()
 	
 func appear():
+	get_tree().call_group("buttons", "set_disabled", false)
 	animate(500, 0)
 
-
 func disappear():
+	get_tree().call_group("buttons", "set_disabled", true)
 	animate(0, 500)

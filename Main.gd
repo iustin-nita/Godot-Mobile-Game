@@ -4,14 +4,16 @@ var Circle = preload("res://objects/Circle.tscn")
 var Jumper = preload("res://objects/Jumper.tscn")
 
 var player
-var score = 0
+var score = 0 setget set_score
+var level = 0
 
 func _ready():
 	randomize()
 	$HUD.hide()
 
 func new_game():
-	score = 0
+	set_score(0)
+	level = 1
 	$HUD.update_score(score)
 	$Camera2D.position = $StartingPosition.position
 	player = Jumper.instance()
@@ -24,6 +26,13 @@ func new_game():
 	$HUD.show_message("Go!")
 	if settings.enable_music:
 		$Music.play()
+
+func set_score(val):
+	score += val
+	$HUD.update_score(score)
+	if score > 0 && score % settings.circles_per_level == 0:
+		level += 1
+		$HUD.show_message("Level %s" % str(level))
 	
 func spawn_circle(_position=null):
 	var c = Circle.instance()
@@ -41,8 +50,7 @@ func _on_Jumper_captured(object):
 	# can't call directly spawn_circle() because we are 
 	# changing the physics state during physics processing
 	call_deferred("spawn_circle")
-	score += 1
-	$HUD.update_score(score)
+	set_score(1)
 
 func _on_Jumper_died():
 	get_tree().call_group("circles", "implode") # lets us call a function on each member of the group
