@@ -1,0 +1,17 @@
+[gd_scene format=2]
+
+[node name="Background" type="CanvasLayer"]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.80957
+margin_right = -3.80957
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
