@@ -8,8 +8,6 @@
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
-fog_enabled = true
-glow_enabled = true
 glow_intensity = 0.36
 glow_strength = 1.09
 glow_bloom = 0.09
@@ -39,4 +37,6 @@ volume_db = -2.019
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
+
+[node name="MusicFade" type="Tween" parent="."]
 [connection signal="start_game" from="Screens" to="." method="new_game"]
