@@ -24,6 +24,7 @@ position = Vector2( 242.854, 632.006 )
 offset = Vector2( 0, -200 )
 current = true
 smoothing_enabled = true
+smoothing_speed = 7.0
 
 [node name="Screens" parent="." instance=ExtResource( 2 )]
 

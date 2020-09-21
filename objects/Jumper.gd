@@ -4,8 +4,8 @@ signal captured
 signal died
 
 onready var trail = $Trail/Points
-var velocity = Vector2(100,0) # start value for testing
-var jump_speed = 1000
+var velocity = Vector2(120,0) # start value for testing
+var jump_speed = 1400
 var target = null # if we're on a circle
 var trail_length = 25
 

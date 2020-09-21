@@ -1,5 +1,6 @@
 extends Area2D
 
+signal full_orbit
 onready var orbit_position = $Pivot/OrbitPosition
 onready var move_tween = $MoveTween
 
@@ -21,13 +22,17 @@ func init(_position, level = 1):
 	position = _position
 	
 	var move_chance = clamp(level-5, 0, 4) / 5.0
+	print('move chance', move_chance)
 	print(move_chance)
 	if randf() < move_chance:
 		move_range = max(25, 100 * rand_range(0.75, 1.25) * move_chance) * pow(-1, randi() % 2)
 		move_speed = max(2.5 - ceil(level/5) * 0.25, 0.75)
+		print('move range', move_range)
+		print('move speed', move_speed)
 	var small_chance = min(0.6, max(0, (level-5) / 10.0))
 	if randf() < small_chance:
 		radius = max(50, radius - level * rand_range(0.75, 1.25))
+		print('radius', radius)
 		
 	$Sprite.material = $Sprite.material.duplicate()
 	$SpriteEffect.material = $SpriteEffect.material
@@ -42,20 +47,26 @@ func init(_position, level = 1):
 	
 func _process(delta):
 	$Pivot.rotation += rotation_speed * delta
-	if mode == MODES.LIMITED && jumper:
+#	if mode == MODES.LIMITED && jumper:
+	if jumper:
 		check_orbits()
 		update()
 
 func check_orbits():
+	# test if done a full circle
 	if abs($Pivot.rotation - orbit_start) > 2 * PI:
-		current_orbits -= 1
-		if settings.enable_sound:
-			$Beep.play()
-		$Label.text = str(current_orbits)
-		if current_orbits <= 0:
-			jumper.die()
-			jumper = null
-			implode()
+		current_orbits += 1
+		emit_signal("full_orbit")
+		if mode == MODES.LIMITED:
+			if settings.enable_sound:
+				$Beep.play()
+			
+			$Label.text = str(num_orbits - current_orbits)
+
+			if current_orbits >= num_orbits:
+				jumper.die()
+				jumper = null
+				implode()
 		orbit_start = $Pivot.rotation
 
 func set_mode(_mode):
@@ -66,26 +77,31 @@ func set_mode(_mode):
 			$Label.hide()
 			color = settings.theme["circle_static"]
 		MODES.LIMITED:
-			current_orbits = num_orbits
-			$Label.text = str(current_orbits)
+#			current_orbits = num_orbits
+			$Label.text = str(num_orbits)
 			$Label.show()
 			color = settings.theme["circle_limited"]
 	$Sprite.material.set_shader_param("color", color)
 	
 func implode():
+	jumper = null
 	$AnimationPlayer.play("implode")
 	yield($AnimationPlayer, "animation_finished")
 	queue_free()
 
 func capture(target):
+	current_orbits = 0
+	
 	jumper = target
 	$AnimationPlayer.play("capture")
 	$Pivot.rotation = (jumper.position - position).angle()
 	orbit_start = $Pivot.rotation
 
 func _draw():
+	if mode != MODES.LIMITED:
+		return
 	if jumper:
-		var r = ((radius - 50) / num_orbits) * (1 + num_orbits - current_orbits)
+		var r = ((radius - 50) / num_orbits) * (1 + current_orbits)
 		draw_circle_arc_poly(Vector2.ZERO, r, orbit_start + PI/2,
 							$Pivot.rotation + PI/2, settings.theme["circle_fill"])
 							
