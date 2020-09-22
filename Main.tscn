@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://UI/Screens.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/music/Black Diamond.ogg" type="AudioStream" id=4]
 [ext_resource path="res://Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ScreenShake.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -26,6 +27,8 @@ current = true
 smoothing_enabled = true
 smoothing_speed = 7.0
 
+[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 6 )]
+
 [node name="Screens" parent="." instance=ExtResource( 2 )]
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
@@ -40,4 +43,5 @@ volume_db = -2.019
 environment = SubResource( 1 )
 
 [node name="MusicFade" type="Tween" parent="."]
+[connection signal="script_changed" from="." to="Camera2D/ScreenShake" method="_on_Main_script_changed"]
 [connection signal="start_game" from="Screens" to="." method="new_game"]

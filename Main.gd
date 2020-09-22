@@ -54,6 +54,7 @@ func _on_Jumper_captured(object):
 #	print('score', score)
 	self.bonus += 1
 	num_circles += 1
+	$Camera2D/ScreenShake.start()
 	if num_circles > 0 and num_circles % settings.circles_per_level == 0:
 		level += 1
 		$HUD.show_message("Level %s" % str(level))
