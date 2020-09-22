@@ -21,17 +21,22 @@ func init(_position, level = 1):
 	set_mode(_mode)
 	position = _position
 	
-	var move_chance = clamp(level-5, 0, 4) / 5.0
+	if(level > 1):
+		settings.changeTheme(settings.color_schemes["NEON3"])
+	if(level>2):
+		settings.changeTheme(settings.color_schemes["NEON1"])
+	
+	var move_chance = clamp(level-3, 0, 4) / 3.0
 	print('move chance', move_chance)
 	print(move_chance)
 	if randf() < move_chance:
 		move_range = max(25, 100 * rand_range(0.75, 1.25) * move_chance) * pow(-1, randi() % 2)
-		move_speed = max(2.5 - ceil(level/5) * 0.25, 0.75)
+		move_speed = max(2.5 - ceil(level/5) * 0.25, 2)
 		print('move range', move_range)
 		print('move speed', move_speed)
-	var small_chance = min(0.6, max(0, (level-5) / 10.0))
+	var small_chance = min(0.6, max(0, (level-4) / 8.0))
 	if randf() < small_chance:
-		radius = max(50, radius - level * rand_range(0.75, 1.25))
+		radius = max(50, radius - level * rand_range(0.55, 1.25))
 		print('radius', radius)
 		
 	$Sprite.material = $Sprite.material.duplicate()

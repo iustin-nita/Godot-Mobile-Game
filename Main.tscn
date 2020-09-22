@@ -39,10 +39,10 @@ stream = ExtResource( 4 )
 volume_db = -2.019
 
 [node name="Background1" parent="." instance=ExtResource( 5 )]
-speed = 80
+speed = 50
 
 [node name="Background2" parent="." instance=ExtResource( 7 )]
-speed = 40
+speed = 200
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )

@@ -6,7 +6,7 @@ var settings_file = "user://settings.save"
 var enable_sound = true
 var enable_music = true
 
-var circles_per_level = 5
+var circles_per_level = 4
 
 var color_schemes = {
 	"NEON1": {
@@ -35,7 +35,10 @@ var color_schemes = {
 	}
 }
 
-var theme = color_schemes["NEON1"]
+var theme = color_schemes["NEON3"]
+
+func changeTheme(_theme):
+	theme = _theme
 
 static func rand_weighted(weights):
 	var sum = 0
