@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://UI/Screens.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/music/Black Diamond.ogg" type="AudioStream" id=4]
 [ext_resource path="res://Background.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ScreenShake.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Background2.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -37,7 +38,11 @@ smoothing_speed = 7.0
 stream = ExtResource( 4 )
 volume_db = -2.019
 
-[node name="Background" parent="." instance=ExtResource( 5 )]
+[node name="Background1" parent="." instance=ExtResource( 5 )]
+speed = 80
+
+[node name="Background2" parent="." instance=ExtResource( 7 )]
+speed = 40
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )

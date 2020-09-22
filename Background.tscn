@@ -1,9 +1,15 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
 
-[node name="Background" type="CanvasLayer"]
+[ext_resource path="res://assets/images/spr_stars01.png" type="Texture" id=2]
+[ext_resource path="res://Background.gd" type="Script" id=3]
+
+[node name="Background" type="ParallaxBackground"]
 layer = -1
+script = ExtResource( 3 )
+speed = 60
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -3.80957
@@ -15,3 +21,10 @@ __meta__ = {
 }
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 2560, 2560 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer"]
+texture = ExtResource( 2 )
