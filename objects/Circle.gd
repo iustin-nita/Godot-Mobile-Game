@@ -4,13 +4,15 @@ signal full_orbit
 onready var orbit_position = $Pivot/OrbitPosition
 onready var move_tween = $MoveTween
 
+onready var test = $"."
+
 # LIMITED = limited number of orbits
 enum MODES {STATIC, LIMITED}
 var radius = 100
 var rotation_speed = PI
 var mode = MODES.STATIC
 var move_range = 0
-var move_speed = 2.0
+var move_speed = 4.0
 var num_orbits = 3
 var current_orbits = 0
 var orbit_start = null
@@ -27,17 +29,17 @@ func init(_position, level = 1):
 		settings.changeTheme(settings.color_schemes["NEON1"])
 	
 	var move_chance = clamp(level-3, 0, 4) / 3.0
-	print('move chance', move_chance)
+#	print('move chance', move_chance)
 	print(move_chance)
 	if randf() < move_chance:
 		move_range = max(25, 100 * rand_range(0.75, 1.25) * move_chance) * pow(-1, randi() % 2)
 		move_speed = max(2.5 - ceil(level/5) * 0.25, 2)
-		print('move range', move_range)
-		print('move speed', move_speed)
+#		print('move range', move_range)
+#		print('move speed', move_speed)
 	var small_chance = min(0.6, max(0, (level-4) / 8.0))
 	if randf() < small_chance:
 		radius = max(50, radius - level * rand_range(0.55, 1.25))
-		print('radius', radius)
+#		print('radius', radius)
 		
 	$Sprite.material = $Sprite.material.duplicate()
 	$SpriteEffect.material = $SpriteEffect.material
@@ -65,10 +67,15 @@ func check_orbits():
 		if mode == MODES.LIMITED:
 			if settings.enable_sound:
 				$Beep.play()
-			
+#			$AnimationPlayer.play("test")
+			$SizeTween.interpolate_property(self, "scale",
+				scale, scale * .8,
+				1, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+			$SizeTween.start()
 			$Label.text = str(num_orbits - current_orbits)
 
 			if current_orbits >= num_orbits:
+				print('current_orbits num_orbits', current_orbits, num_orbits)
 				jumper.die()
 				jumper = null
 				implode()
@@ -82,7 +89,7 @@ func set_mode(_mode):
 			$Label.hide()
 			color = settings.theme["circle_static"]
 		MODES.LIMITED:
-#			current_orbits = num_orbits
+			current_orbits = num_orbits
 			$Label.text = str(num_orbits)
 			$Label.show()
 			color = settings.theme["circle_limited"]
@@ -95,6 +102,7 @@ func implode():
 	queue_free()
 
 func capture(target):
+	print("CAPGTURE taret", target)
 	current_orbits = 0
 	
 	jumper = target
@@ -106,10 +114,11 @@ func _draw():
 	if mode != MODES.LIMITED:
 		return
 	if jumper:
-		var r = ((radius - 50) / num_orbits) * (1 + current_orbits)
-		draw_circle_arc_poly(Vector2.ZERO, r, orbit_start + PI/2,
-							$Pivot.rotation + PI/2, settings.theme["circle_fill"])
-							
+		return
+##		var r = ((radius - 50) / num_orbits) * (1 + current_orbits)
+##		draw_circle_arc_poly(Vector2.ZERO, r, orbit_start + PI/2,
+##							$Pivot.rotation + PI/2, settings.theme["circle_fill"])
+#
 func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 	var nb_points = 32
 	var points_arc = PoolVector2Array()

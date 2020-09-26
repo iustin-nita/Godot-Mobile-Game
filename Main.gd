@@ -17,6 +17,7 @@ func _ready():
 	$HUD.hide()
 	
 func new_game():
+	print('new gmae')
 	new_highscore = false
 	self.score = 0
 	self.bonus = 0
@@ -49,7 +50,7 @@ func spawn_circle(_position=null):
 func _on_Jumper_captured(object):
 	$Camera2D.position = object.position
 	object.capture(player)
-	print('captired', object)
+#	print('captired', object)
 	call_deferred("spawn_circle")
 	self.score += 1 * bonus
 #	print('score', score)

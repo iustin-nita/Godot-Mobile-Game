@@ -48,6 +48,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 		die()
 
 func _on_Jumper_area_entered(area):
+	print('_on_Jumper_area_entered area', area);
 	target = area
 	velocity = Vector2.ZERO
 	emit_signal("captured", area)
