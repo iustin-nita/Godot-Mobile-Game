@@ -38,7 +38,7 @@ shader = ExtResource( 6 )
 shader_param/color = Color( 0.454902, 0, 0.721569, 1 )
 shader_param/angle_degrees = 0.848
 shader_param/Samples = 8
-shader_param/strength = 1.0
+shader_param/strength = 0.1461
 shader_param/noise = ExtResource( 2 )
 
 [sub_resource type="CircleShape2D" id=4]
@@ -53,10 +53,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.5 ),
-"transitions": PoolRealArray( 4.14106, 4.14106, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 4.14106, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.6, 1.6 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 2, 2 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("SpriteEffect:modulate")
@@ -68,7 +68,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 0.917647 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("SpriteEffect:visible")
@@ -89,10 +89,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 12.1257, 12.1257, 12.1257 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 0.196146, 0.0398301, 0.840896, 12.1257 ),
 "update": 0,
-"values": [ 0.0, 1.0, 0.5, 1.0 ]
+"values": [ 0.4156, 0.6962, 0.4102, 0.1461 ]
 }
 
 [sub_resource type="Animation" id=6]
