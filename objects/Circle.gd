@@ -96,12 +96,14 @@ func set_mode(_mode):
 			$Label.show()
 			color = settings.theme["circle_limited"]
 	$Sprite.material.set_shader_param("color", color)
+	$SpriteEffect.material.set_shader_param("color", color)
 	$Particles2D.process_material.color = color
 	
 func implode():
 	$Particles2D.emitting = true
 	jumper = null
-	$AnimationPlayer.play("implode")
+	$AnimationPlayer2.play("implode")
+	$AnimationPlayer.play("capture")
 	yield($AnimationPlayer, "animation_finished")
 	queue_free()
 
@@ -111,7 +113,7 @@ func capture(target):
 	current_orbits = 0
 	
 	jumper = target
-	$AnimationPlayer.play("capture")
+#	$AnimationPlayer.play("capture")
 	$Pivot.rotation = (jumper.position - position).angle()
 	orbit_start = $Pivot.rotation
 
