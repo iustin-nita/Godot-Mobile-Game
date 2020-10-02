@@ -32,6 +32,7 @@ func new_game():
 	player.connect("died", self, "_on_Jumper_died")
 	player.connect("jumped", $Background1, "on_player_jump")
 	player.connect("jumped", $Background2, "on_player_jump")
+	player.connect("jumped", $Background3, "on_player_jump")
 	spawn_circle($StartPosition.position)
 	$HUD.show()
 	$HUD.show_message("Go!")
