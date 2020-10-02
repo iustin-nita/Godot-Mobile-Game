@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://UI/Screens.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Background.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ScreenShake.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Background2.tscn" type="PackedScene" id=7]
+[ext_resource path="res://starfield/StarField.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -48,5 +49,15 @@ speed = 200
 environment = SubResource( 1 )
 
 [node name="MusicFade" type="Tween" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Background3" parent="." instance=ExtResource( 5 )]
+
+[node name="StarField" parent="Background3" instance=ExtResource( 8 )]
+position = Vector2( 194.288, 340.003 )
+amount = 5
+speed_scale = 2.71
+explosiveness = 0.46
 [connection signal="script_changed" from="." to="Camera2D/ScreenShake" method="_on_Main_script_changed"]
 [connection signal="start_game" from="Screens" to="." method="new_game"]

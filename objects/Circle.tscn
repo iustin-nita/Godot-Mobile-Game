@@ -29,16 +29,16 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
 shader_param/color = Color( 0.701961, 0.2, 0.2, 1 )
-shader_param/speed = 11.494
-shader_param/radius = 0.367
-shader_param/width = 0.173
+shader_param/speed = 16.036
+shader_param/radius = 0.359
+shader_param/width = 0.189
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=11]
 shader = ExtResource( 6 )
 shader_param/color = Color( 0.454902, 0, 0.721569, 1 )
-shader_param/angle_degrees = 0.848
+shader_param/angle_degrees = 0.0
 shader_param/Samples = 8
-shader_param/strength = 0.1461
+shader_param/strength = 0.5966
 shader_param/noise = ExtResource( 2 )
 
 [sub_resource type="CircleShape2D" id=4]
@@ -172,9 +172,10 @@ z_index = -2
 texture = ExtResource( 1 )
 
 [node name="SpriteEffect" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-material = SubResource( 3 )
-scale = Vector2( 1e-05, 1e-05 )
+visible = false
+modulate = Color( 1, 1, 1, 0.917647 )
+material = SubResource( 11 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

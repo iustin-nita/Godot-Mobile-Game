@@ -1,5 +1,6 @@
 extends Area2D
 
+signal jumped
 signal captured
 signal died
 
@@ -35,6 +36,7 @@ func jump():
 	target.implode()
 	target = null
 	velocity = transform.x * jump_speed
+	emit_signal("jumped")
 	if settings.enable_sound:
 		$Jump.play()
 

@@ -23,10 +23,12 @@ func init(_position, level = 1):
 	set_mode(_mode)
 	position = _position
 	
-	if(level > 1):
+	if(level > 1 and level < 3):
 		settings.changeTheme(settings.color_schemes["NEON3"])
-	if(level>2):
+	if(level>3 and level < 5):
 		settings.changeTheme(settings.color_schemes["NEON1"])
+	if(level>5 and level < 7):
+		settings.changeTheme(settings.color_schemes["NEON2"])
 	
 	var move_chance = clamp(level-3, 0, 4) / 3.0
 #	print('move chance', move_chance)
