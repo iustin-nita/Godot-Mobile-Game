@@ -96,14 +96,17 @@ func set_mode(_mode):
 			$Label.show()
 			color = settings.theme["circle_limited"]
 	$Sprite.material.set_shader_param("color", color)
+	$Particles2D.process_material.color = color
 	
 func implode():
+	$Particles2D.emitting = true
 	jumper = null
 	$AnimationPlayer.play("implode")
 	yield($AnimationPlayer, "animation_finished")
 	queue_free()
 
 func capture(target):
+	$Particles2D.emitting = true
 	print("CAPGTURE taret", target)
 	current_orbits = 0
 	
