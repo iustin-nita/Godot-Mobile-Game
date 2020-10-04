@@ -56,8 +56,8 @@ func init(_position, level = 1):
 	
 func _process(delta):
 	$Pivot.rotation += rotation_speed * delta
-#	if mode == MODES.LIMITED && jumper:
-	if jumper:
+	if mode == MODES.LIMITED && jumper:
+#	if jumper:
 		check_orbits()
 		update()
 
@@ -70,10 +70,10 @@ func check_orbits():
 			if settings.enable_sound:
 				$Beep.play()
 #			$AnimationPlayer.play("test")
-			$SizeTween.interpolate_property(self, "scale",
-				scale, scale * .8,
-				1, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-			$SizeTween.start()
+#			$SizeTween.interpolate_property(self, "scale",
+#				scale, scale * .8,
+#				1, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#			$SizeTween.start()
 			$Label.text = str(num_orbits - current_orbits)
 
 			if current_orbits >= num_orbits:
@@ -116,6 +116,9 @@ func capture(target):
 #	$AnimationPlayer.play("capture")
 	$Pivot.rotation = (jumper.position - position).angle()
 	orbit_start = $Pivot.rotation
+	if mode == MODES.LIMITED:
+		print('set_size_tween')
+		set_size_tween()
 
 func _draw():
 	if mode != MODES.LIMITED:
@@ -145,3 +148,10 @@ func set_tween(_object=null, _key=null):
 				position.x, position.x + move_range,
 				move_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	move_tween.start()
+
+
+func set_size_tween(_object=null, _key=null):
+	$SizeTween.interpolate_property(self, "scale",
+				scale, scale * .2,
+				num_orbits * 2, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$SizeTween.start()

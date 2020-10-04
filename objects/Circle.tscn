@@ -391,3 +391,5 @@ volume_db = 2.019
 
 [node name="SizeTween" type="Tween" parent="."]
 [connection signal="tween_completed" from="MoveTween" to="." method="set_tween"]
+[connection signal="tween_completed" from="SizeTween" to="." method="_on_SizeTween_tween_completed"]
+[connection signal="tween_started" from="SizeTween" to="." method="_on_SizeTween_tween_started"]
