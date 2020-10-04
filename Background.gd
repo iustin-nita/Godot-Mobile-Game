@@ -11,4 +11,4 @@ func _process(delta):
 
 func on_player_jump():
 	print('onplayejump')
-	$AnimationPlayer.play("move")
+#	$AnimationPlayer.play("move")

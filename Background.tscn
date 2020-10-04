@@ -1,53 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://blur/BlueNoise.png" type="Texture" id=1]
 [ext_resource path="res://assets/images/spr_stars01.png" type="Texture" id=2]
 [ext_resource path="res://Background.gd" type="Script" id=3]
 
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-render_mode blend_mix;
-
-uniform vec4 color : hint_color;
-uniform float angle_degrees ;
-uniform sampler2D noise;
-uniform int Samples = 8; //MUST BE A MULTIPLE OF 2
-uniform float strength : hint_range(0,1.0, 0.0001);
-
-//	Directional Blur Shader
-// Adapted from https://www.shadertoy.com/view/ldBXWG
-
-vec4 DirectionalBlur(in vec2 uv, in vec2 MotionVector, in sampler2D Texture)
-{
-    vec4 Color = vec4(0.0);  
-    float Noise = texture(noise,uv*20.0).x-0.485;
- 
-    for (int i=1; i<=Samples/2; i++)
-    {
-	Color += texture(Texture,uv+ (float(i)*MotionVector ) /float(Samples/2)*Noise*2.0);
-	Color += texture(Texture,uv- (float(i)*MotionVector ) /float(Samples/2)*Noise*2.0);
-    }    
-    return Color/(float(Samples));    
-}
-
-void fragment(){
-	vec2 blur_vector = vec2(cos(radians(angle_degrees)),sin(radians(angle_degrees)))*strength;
-	
-	COLOR=DirectionalBlur(UV, blur_vector*strength, TEXTURE);
-	COLOR.rgb = color.rgb;
-//	COLOR.a = texture(TEXTURE, UV).a;
-	
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/color = Color( 1, 1, 1, 0 )
-shader_param/angle_degrees = 90.0
-shader_param/Samples = 100
-shader_param/strength = 0.0
-shader_param/noise = ExtResource( 1 )
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "move"
 length = 1.2
 tracks/0/type = "value"
@@ -87,8 +43,7 @@ visible = false
 motion_mirroring = Vector2( 2560, 2560 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxLayer"]
-material = SubResource( 2 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/move = SubResource( 3 )
+anims/move = SubResource( 1 )

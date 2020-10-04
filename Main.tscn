@@ -22,10 +22,9 @@ script = ExtResource( 1 )
 [node name="Background3" parent="." instance=ExtResource( 5 )]
 
 [node name="StarField" parent="Background3" instance=ExtResource( 8 )]
-visible = false
 show_behind_parent = true
-position = Vector2( 194.288, 340.003 )
-amount = 5
+position = Vector2( 278.655, 276.728 )
+amount = 10
 speed_scale = 2.71
 explosiveness = 0.46
 

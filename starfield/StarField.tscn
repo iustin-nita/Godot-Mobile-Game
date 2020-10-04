@@ -34,12 +34,9 @@ scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
 [node name="StarField" type="Particles2D"]
-position = Vector2( 300, 500 )
 z_index = -1
-emitting = false
 lifetime = 6.0
-one_shot = true
 preprocess = 6.0
-visibility_rect = Rect2( -600, -300, 600, 1024 )
+visibility_rect = Rect2( 100, 100, 300, 400 )
 process_material = SubResource( 5 )
 texture = ExtResource( 1 )
