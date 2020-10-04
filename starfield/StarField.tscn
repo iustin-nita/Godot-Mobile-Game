@@ -1,21 +1,21 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://StarField/star.svg" type="Texture" id=1]
+[ext_resource path="res://starfield/star.png" type="Texture" id=1]
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.0905172, 0.318966, 0.560345, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.979627, 0.988057, 0.729464, 1, 0.976338, 0.968283, 0.762764, 0.729412, 0.954741, 0.999049, 0.977636, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="Curve" id=1]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.241936, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 0.0482635 ), 0.0, 0.0, 0, 0, Vector2( 0.745161, 0.990571 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=2]
-curve = SubResource( 1 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
 emission_box_extents = Vector3( 200, 600, 0 )
 flag_disable_z = true
@@ -30,15 +30,16 @@ damping = 2.79
 angle = 57.4
 scale = 0.3
 scale_random = 1.0
-scale_curve = SubResource( 2 )
-color_ramp = SubResource( 5 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 
 [node name="StarField" type="Particles2D"]
 position = Vector2( 300, 500 )
 z_index = -1
-amount = 23
+emitting = false
 lifetime = 6.0
+one_shot = true
 preprocess = 6.0
 visibility_rect = Rect2( -600, -300, 600, 1024 )
-process_material = SubResource( 3 )
+process_material = SubResource( 5 )
 texture = ExtResource( 1 )
