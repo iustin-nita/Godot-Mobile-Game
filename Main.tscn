@@ -60,5 +60,7 @@ environment = SubResource( 1 )
 [node name="MusicFade" type="Tween" parent="."]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="CameraZoomTween" type="Tween" parent="."]
 [connection signal="script_changed" from="." to="Camera2D/ScreenShake" method="_on_Main_script_changed"]
 [connection signal="start_game" from="Screens" to="." method="new_game"]

@@ -49,6 +49,7 @@ func _on_button_pressed(button):
 			settings.save_settings()
 		
 func change_screen(new_screen):
+	print('change_screen', new_screen)
 	if current_screen:
 		current_screen.disappear()
 		yield(current_screen.tween, "tween_completed")

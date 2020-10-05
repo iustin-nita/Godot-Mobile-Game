@@ -18,17 +18,13 @@ var current_orbits = 0
 var orbit_start = null
 var jumper = null
 
-func init(_position, level = 1):
+func init(_position, level = 0):
 	var _mode = settings.rand_weighted([10, level - 1])
 	set_mode(_mode)
 	position = _position
-	
-	if(level > 1 and level < 3):
-		settings.changeTheme(settings.color_schemes["NEON3"])
-	if(level>3 and level < 5):
-		settings.changeTheme(settings.color_schemes["NEON1"])
-	if(level>5 and level < 7):
-		settings.changeTheme(settings.color_schemes["NEON2"])
+	print('level ', level)
+	set_theme(level)
+	set_arrow_speed(level)
 	
 	var move_chance = clamp(level-3, 0, 4) / 3.0
 #	print('move chance', move_chance)
@@ -50,7 +46,9 @@ func init(_position, level = 1):
 	var img_size = $Sprite.texture.get_size().x / 2
 	$Sprite.scale = Vector2(1,1) * radius / img_size
 	orbit_position.position.x = radius + 25
+
 	rotation_speed *= pow(-1, randi() % 2)
+	print('rotation_speed2 ', rotation_speed)
 #	$AnimationPlayer.play("music")
 	set_tween()
 	
@@ -60,6 +58,34 @@ func _process(delta):
 #	if jumper:
 		check_orbits()
 		update()
+
+func set_theme(level):
+	if(level >= 1 and level <= 3):
+		settings.changeTheme(settings.color_schemes["NEON3"])
+	elif(level>=3 and level <= 5):
+		settings.changeTheme(settings.color_schemes["NEON1"])
+	elif(level>=5 and level <= 7):
+		settings.changeTheme(settings.color_schemes["NEON2"])
+	else:
+		settings.changeTheme(settings.color_schemes["NEON1"])
+#	print('set_theme', settings.theme)
+
+func set_arrow_speed(level):
+	if(level >= 0 and level < 4):
+		rotation_speed /= 1.5
+	if(level>=4 and level < 7):
+		rotation_speed /= 1.3
+	elif(level>=7 and level < 9):
+		rotation_speed /= 1.1
+	elif (level >= 9 and level < 12):
+		rotation_speed *= 1.2
+	elif (level >= 12 and level < 14):
+		rotation_speed *= 1.3
+	elif (level >= 14 and level < 16):
+		rotation_speed *= 1.4
+	elif (level >= 16):
+		rotation_speed *= 1.5
+	print('set_arrow_speed', rotation_speed)
 
 func check_orbits():
 	# test if done a full circle
@@ -77,7 +103,7 @@ func check_orbits():
 			$Label.text = str(num_orbits - current_orbits)
 
 			if current_orbits >= num_orbits:
-				print('current_orbits num_orbits', current_orbits, num_orbits)
+#				print('current_orbits num_orbits', current_orbits, num_orbits)
 				jumper.die()
 				jumper = null
 				implode()
@@ -109,7 +135,7 @@ func implode():
 
 func capture(target):
 	$Particles2D.emitting = true
-	print("CAPGTURE taret", target)
+#	print("CAPGTURE taret", target)
 	current_orbits = 0
 	
 	jumper = target
@@ -117,7 +143,6 @@ func capture(target):
 	$Pivot.rotation = (jumper.position - position).angle()
 	orbit_start = $Pivot.rotation
 	if mode == MODES.LIMITED:
-		print('set_size_tween')
 		set_size_tween()
 
 func _draw():

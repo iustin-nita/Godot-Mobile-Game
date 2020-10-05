@@ -10,5 +10,6 @@ func _process(delta):
 	set_scroll_offset(Vector2(0, offset_scroll))
 
 func on_player_jump():
-	print('onplayejump')
+#	print('onplayejump')
+	pass
 #	$AnimationPlayer.play("move")

@@ -48,7 +48,7 @@ text = "Level: 0"
 align = 1
 
 [node name="Buttons" parent="MarginContainer/VBoxContainer" index="2"]
-margin_top = 707.0
+margin_top = 742.0
 margin_bottom = 842.0
 
 [node name="Home" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons" index="0" groups=[
@@ -56,7 +56,7 @@ margin_bottom = 842.0
 ]]
 margin_left = 95.0
 margin_right = 195.0
-margin_bottom = 135.0
+margin_bottom = 100.0
 texture_normal = ExtResource( 3 )
 
 [node name="Play" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons" index="1" groups=[
@@ -64,7 +64,7 @@ texture_normal = ExtResource( 3 )
 ]]
 margin_left = 245.0
 margin_right = 345.0
-margin_bottom = 135.0
+margin_bottom = 100.0
 texture_normal = ExtResource( 2 )
 
 [node name="Buttons2" parent="MarginContainer/VBoxContainer" index="3"]

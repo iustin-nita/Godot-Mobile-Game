@@ -6,7 +6,7 @@ var settings_file = "user://settings.save"
 var enable_sound = true
 var enable_music = true
 
-var circles_per_level = 4
+var circles_per_level = 1
 
 var color_schemes = {
 	"NEON1": {

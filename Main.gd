@@ -15,24 +15,16 @@ func _ready():
 	randomize()
 	load_score()
 	$HUD.hide()
-	
+
 func new_game():
 	print('new gmae')
-	new_highscore = false
-	self.score = 0
-	self.bonus = 0
-	num_circles = 0
-	level = 1
+	reset()
 	$HUD.update_score(score, 0)
 	$Camera2D.position = $StartPosition.position
 	player = Jumper.instance()
 	player.position = $StartPosition.position
 	add_child(player)
-	player.connect("captured", self, "_on_Jumper_captured")
-	player.connect("died", self, "_on_Jumper_died")
-	player.connect("jumped", $Background1, "on_player_jump")
-	player.connect("jumped", $Background2, "on_player_jump")
-	player.connect("jumped", $Background3, "on_player_jump")
+	connect_signals()
 	spawn_circle($StartPosition.position)
 	$HUD.show()
 	$HUD.show_message("Go!")
@@ -40,10 +32,24 @@ func new_game():
 		$Music.volume_db = 0
 		$Music.play()
 	
+func reset():
+	new_highscore = false
+	set_score(0)
+	set_bonus(0)
+	num_circles = 0
+	level = 0
+	
+func connect_signals():
+	player.connect("captured", self, "_on_Jumper_captured")
+	player.connect("died", self, "_on_Jumper_died")
+	player.connect("jumped", $Background1, "on_player_jump")
+	player.connect("jumped", $Background2, "on_player_jump")
+	player.connect("jumped", $Background3, "on_player_jump")
+
 func spawn_circle(_position=null):
 	var c = Circle.instance()
 	if !_position:
-		var x = rand_range(-160, 160)
+		var x = rand_range(-150, 150)
 		var y = rand_range(-550, -330)
 		_position = player.target.position + Vector2(x, y)
 	add_child(c)
@@ -53,7 +59,7 @@ func spawn_circle(_position=null):
 func _on_Jumper_captured(object):
 	$Camera2D.position = object.position
 	object.capture(player)
-#	print('captired', object)
+	print('captired', object)
 	call_deferred("spawn_circle")
 	self.score += 1 * bonus
 #	print('score', score)
@@ -63,14 +69,19 @@ func _on_Jumper_captured(object):
 	if num_circles > 0 and num_circles % settings.circles_per_level == 0:
 		level += 1
 		$HUD.show_message("Level %s" % str(level))
+#	if (level == 5):
+#		$CameraZoomTween.interpolate_property($Camera2D, 'zoom', Vector2(1,1), Vector2(1.5,1.5), 2, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT )
+#		$CameraZoomTween.start()
+#		$Camera2D.zoom = Vector2(1.5, 1.5)
 
 func set_score(value):
-#	print('setscore value', value)
-	$HUD.update_score(score, value)
-	score = value
-	if score > highscore and !new_highscore:
-		$HUD.show_message("New\nRecord!")
-		new_highscore = true
+	print('setscore value', value)
+	if(value):
+		$HUD.update_score(score, value)
+		score = value
+		if score > highscore and !new_highscore:
+			$HUD.show_message("New\nRecord!")
+			new_highscore = true
 
 func _on_Jumper_died():
 	if score > highscore:

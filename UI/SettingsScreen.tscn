@@ -21,16 +21,16 @@ margin_bottom = 278.0
 [node name="Sound" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons" index="0" groups=[
 "buttons",
 ]]
-margin_left = 118.0
-margin_right = 218.0
+margin_left = 95.0
+margin_right = 195.0
 margin_bottom = 100.0
 texture_normal = ExtResource( 4 )
 
 [node name="Music" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons" index="1" groups=[
 "buttons",
 ]]
-margin_left = 222.0
-margin_right = 322.0
+margin_left = 245.0
+margin_right = 345.0
 margin_bottom = 100.0
 texture_normal = ExtResource( 3 )
 
